@@ -1,0 +1,66 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: fa05064d8d82316607c204714a866407bd1155069fa6d68bbfec6df705dc307e
+
+name:           optics-haskell
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/dabliuw22/optics-haskell#readme>
+homepage:       https://github.com/dabliuw22/haskell-http#readme
+bug-reports:    https://github.com/dabliuw22/haskell-http/issues
+author:         Will Leyton
+maintainer:     wleylop22@gmail.com
+copyright:      2020 Will Leyton
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/dabliuw22/haskell-http
+
+library
+  exposed-modules:
+      Lens.Persons
+      Prism.Json
+  other-modules:
+      Paths_optics_haskell
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , lens
+  default-language: Haskell2010
+
+executable optics-haskell-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_optics_haskell
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , lens
+    , optics-haskell
+  default-language: Haskell2010
+
+test-suite optics-haskell-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_optics_haskell
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , lens
+    , optics-haskell
+  default-language: Haskell2010

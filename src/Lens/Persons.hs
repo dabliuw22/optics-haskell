@@ -38,9 +38,18 @@ newPerson =
 newPersonTwo =
   (address . city . c) .~ capitalize (person ^. (address . city . c)) $ person
 
+newPersonThree =
+  (address . city . c) %~ capitalize $ person
+
+newPersonFour =
+  over (address . city . c) capitalize person
+
+newPersonFive =
+  ((address . city . c) %~ capitalize) . ((name . n) .~ "Jhon Doe") $  person
+
 capitalize :: String -> String
 capitalize [] = []
 capitalize (h : t) = toUpper h : t
 
 mainLens :: IO ()
-mainLens = print newPersonTwo
+mainLens = print newPersonFive

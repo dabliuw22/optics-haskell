@@ -27,7 +27,7 @@ person = Person {
 }
 
 address' :: Lens' Person Address
-address' = lens getter setter 
+address' = lens getter setter
   where
     getter :: Person -> Address
     getter = _address
@@ -59,9 +59,17 @@ newPersonFour =
   over (address . city . c) capitalize person
 
 newPersonFive =
-  ((address . city . c) %~ capitalize) . ((name . n) .~ "Jhon Doe") $  person
+  ((address . city . c) %~ capitalize) . ((name . n) .~ "Jhon Doe") $ person
   
-newPersonSix = compose' %~ capitalize $ person
+newPersonSix =
+  person & ((address . city . c) %~ capitalize) . ((name . n) .~ "Jhon Doe")
+  
+newPersonSeven =
+  person 
+    & ((address . city . c) %~ capitalize) 
+    & ((name . n) .~ "Jhon Doe")
+
+newPersonEight = compose' %~ capitalize $ person
 
 capitalize :: String -> String
 capitalize [] = []

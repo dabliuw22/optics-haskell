@@ -26,6 +26,20 @@ person = Person {
   }
 }
 
+address' :: Lens' Person Address
+address' = lens getter setter 
+  where
+    getter :: Person -> Address
+    getter = _address
+    setter :: Person -> Address -> Person
+    setter = \p a -> p { _address = a }
+city' :: Lens' Address CityName
+city' = lens _city $ \a c -> a { _city = c }
+cityName' :: Lens' CityName String
+cityName' = lens _c $ \c n -> c { _c = n }
+compose' :: Lens' Person String
+compose' = address' . city' . cityName'
+
 makeLenses ''AddressStreet
 makeLenses ''CityName
 makeLenses ''Address
@@ -46,6 +60,8 @@ newPersonFour =
 
 newPersonFive =
   ((address . city . c) %~ capitalize) . ((name . n) .~ "Jhon Doe") $  person
+  
+newPersonSix = compose' %~ capitalize $ person
 
 capitalize :: String -> String
 capitalize [] = []

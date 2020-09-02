@@ -17,13 +17,19 @@ stringPrism =
     )
 jsonString :: Json
 jsonString = JsonString { _s = "string" }
-getString = jsonString ^? stringPrism
+getString = preview stringPrism jsonString
+getStringTwo = jsonString ^? stringPrism
+newJsonString = review stringPrism "String"
+newJsonStringTwo = stringPrism # "String"
 
 makeLenses ''Json
 
 jsonInt :: Json
 jsonInt = JsonInt { _i = 1 }
+newJsonInt :: Json
 newJsonInt = set i ((jsonInt ^. i) + 1) jsonInt
+getInt :: Maybe Int
+getInt = jsonInt ^? i
 
 instance Semigroup Int where
   (<>) m1 m2 = m1 + m2

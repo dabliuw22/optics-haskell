@@ -32,7 +32,7 @@ getInt :: Maybe Int
 getInt = jsonInt ^? i
 
 instance Semigroup Int where
-  (<>) m1 m2 = m1 + m2
+  (<>) a b = a + b
 
 instance Monoid Int where
   mempty = 0

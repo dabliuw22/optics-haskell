@@ -3,6 +3,7 @@
 module Prism.Json (Json(..), mainPrism) where
 
 import Control.Lens
+import Control.Lens.Internal.PrismTH (makePrisms)
 
 data Json = JsonNull
   | JsonString { _s :: String }
@@ -23,6 +24,7 @@ newJsonString = review stringPrism "String"
 newJsonStringTwo = stringPrism # "String"
 
 makeLenses ''Json
+makePrisms ''Json
 
 jsonInt :: Json
 jsonInt = JsonInt { _i = 1 }
@@ -30,6 +32,10 @@ newJsonInt :: Json
 newJsonInt = set i ((jsonInt ^. i) + 1) jsonInt
 getInt :: Maybe Int
 getInt = jsonInt ^? i
+getIntTwo :: Maybe Int
+getIntTwo = jsonInt ^? _JsonInt
+newJsonIntTwo :: Json
+newJsonIntTwo = _JsonInt # 2
 
 instance Semigroup Int where
   (<>) a b = a + b

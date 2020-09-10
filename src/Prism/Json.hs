@@ -23,17 +23,14 @@ getStringTwo = jsonString ^? stringPrism
 newJsonString = review stringPrism "String"
 newJsonStringTwo = stringPrism # "String"
 
-makeLenses ''Json
 makePrisms ''Json
 
 jsonInt :: Json
 jsonInt = JsonInt { _i = 1 }
 newJsonInt :: Json
-newJsonInt = set i ((jsonInt ^. i) + 1) jsonInt
+newJsonInt = over _JsonInt (+ 1) jsonInt
 getInt :: Maybe Int
-getInt = jsonInt ^? i
-getIntTwo :: Maybe Int
-getIntTwo = jsonInt ^? _JsonInt
+getInt = jsonInt ^? _JsonInt
 newJsonIntTwo :: Json
 newJsonIntTwo = _JsonInt # 2
 

@@ -54,7 +54,7 @@ newPersonTwo =
 
 newPersonThree =
   (address . city . c) %~ capitalize $ person
-
+    
 newPersonFour =
   over (address . city . c) capitalize person
 
